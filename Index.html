@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Resort Booking System</title>
+    <title>Resort Booking Management</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +18,8 @@
             background-color: white;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             border-radius: 10px;
+            border-top: 2px solid #4CAF50;
+            border-bottom: 2px solid #4CAF50;
         }
         .button {
             background-color: #4CAF50;
@@ -32,11 +34,6 @@
         .button:hover {
             background-color: #45a049;
         }
-        .icon {
-            font-size: 30px;
-            margin: 10px;
-            cursor: pointer;
-        }
         .form-group {
             margin-bottom: 15px;
         }
@@ -50,47 +47,26 @@
             border-radius: 5px;
             width: 100%;
         }
-        .calendar {
-            display: inline-block;
+        .report-link {
+            position: fixed; /* Fixed in the top-right corner of the screen */
+            top: 10px;
+            right: 10px;
+            background-color: #f44336; /* Red for attention */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none; /* No underline */
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-<!-- Welcome Screen -->
-<div class="container" id="welcome-screen">
-    <h1>Welcome to Resort Booking</h1>
+<!-- Resort Booking Management Page -->
+<div class="container" id="management-page">
+    <h2>Resort Booking Management</h2>
     <div class="form-group">
-        <label for="language">Language Selection:</label>
-        <select id="language">
-            <option value="english">English</option>
-            <option value="arabic">Arabic</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="accessibility">Accessibility Options:</label>
-        <select id="accessibility">
-            <option value="normal">Normal</option>
-            <option value="large-text">Large Text</option>
-            <option value="text-to-speech">Text-to-Speech</option>
-        </select>
-    </div>
-    <button class="button" onclick="showPage('date-selection')">Continue</button>
-</div>
-
-<!-- Date Selection Page -->
-<div class="container" id="date-selection" style="display: none;">
-    <h2>Select Dates and Room</h2>
-    <div class="form-group">
-        <label for="check-in">Check-in Date:</label>
-        <input type="date" id="check-in" class="calendar">
-    </div>
-    <div class="form-group">
-        <label for="check-out">Check-out Date:</label>
-        <input type="date" id="check-out" class="calendar">
-    </div>
-    <div class="form-group">
-        <label for="room">Select Room:</label>
+        <label for="room">Select Room to Manage:</label>
         <select id="room">
             <option value="1">Room 1</option>
             <option value="2">Room 2</option>
@@ -100,38 +76,43 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="room-size">Select Room Size:</label>
-        <div>
-            <span class="icon" onclick="alert('Small room selected')">🛏️</span>
-            <span class="icon" onclick="alert('Medium room selected')">🛏️🛏️</span>
-            <span class="icon" onclick="alert('Large room selected')">🛏️🛏️🛏️</span>
-        </div>
-    </div>
-    <button class="button" onclick="showPage('payment-method')">Continue</button>
-</div>
-
-<!-- Payment Method Page -->
-<div class="container" id="payment-method" style="display: none;">
-    <h2>Select Payment Method</h2>
-    <div class="form-group">
-        <label for="payment">Payment Method:</label>
-        <select id="payment">
-            <option value="credit-card">Credit Card</option>
-            <option value="debit-card">Debit Card</option>
-            <option value="paypal">PayPal</option>
+        <label for="status">Assign Status to Selected Room:</label>
+        <select id="status">
+            <option value="vacant">Vacant</option>
+            <option value="occupied">Occupied</option>
+            <option value="maintenance">Maintenance</option>
         </select>
     </div>
-    <button class="button" onclick="alert('Proceed to payment processing')">Continue</button>
+    <button class="button" onclick="alert('Status updated')">Update Status</button>
+
+    <!-- Link to the Submit Report Page -->
+    <a class="report-link" href="#report-page">Submit Report</a>
+</div>
+
+<!-- Submit Report Page -->
+<div class="container" id="report-page" style="display: none;">
+    <h2>Submit Report</h2>
+    <div class="form-group">
+        <label for="report-upload">Upload Report:</label>
+        <input type="file" id="report-upload" accept=".pdf,.doc,.docx,.xlsx,.csv">
+    </div>
+    <button class="button" onclick="alert('Report submitted')">Submit Report</button>
+    <button class="button" onclick="showPage('management-page')">Back to Management</button>
 </div>
 
 <script>
 function showPage(pageId) {
     var pages = document.querySelectorAll('.container');
     pages.forEach(function(page) {
-        page.style.display = 'none';
+        page.style.display = 'none'; // Hide all containers
     });
-    document.getElementById(pageId).style.display = 'block';
+    document.getElementById(pageId).style.display = 'block'; // Show only the selected container
 }
+
+document.querySelector('.report-link').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default link behavior
+    showPage('report-page'); // Show the report page
+});
 </script>
 
 </body>

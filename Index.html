@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resort Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .icon {
+            font-size: 30px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .calendar {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Welcome Screen -->
+<div class="container" id="welcome-screen">
+    <h1>Welcome to Resort Booking</h1>
+    <div class="form-group">
+        <label for="language">Language Selection:</label>
+        <select id="language">
+            <option value="english">English</option>
+            <option value="arabic">Arabic</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="accessibility">Accessibility Options:</label>
+        <select id="accessibility">
+            <option value="normal">Normal</option>
+            <option value="large-text">Large Text</option>
+            <option value="text-to-speech">Text-to-Speech</option>
+        </select>
+    </div>
+    <button class="button" onclick="showPage('date-selection')">Continue</button>
+</div>
+
+<!-- Date Selection Page -->
+<div class="container" id="date-selection" style="display: none;">
+    <h2>Select Dates and Room</h2>
+    <div class="form-group">
+        <label for="check-in">Check-in Date:</label>
+        <input type="date" id="check-in" class="calendar">
+    </div>
+    <div class="form-group">
+        <label for="check-out">Check-out Date:</label>
+        <input type="date" id="check-out" class="calendar">
+    </div>
+    <div class="form-group">
+        <label for="room">Select Room:</label>
+        <select id="room">
+            <option value="1">Room 1</option>
+            <option value="2">Room 2</option>
+            <option value="3">Room 3</option>
+            <option value="4">Room 4</option>
+            <option value="5">Room 5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="room-size">Select Room Size:</label>
+        <div>
+            <span class="icon" onclick="alert('Small room selected')">🛏️</span>
+            <span class="icon" onclick="alert('Medium room selected')">🛏️🛏️</span>
+            <span class="icon" onclick="alert('Large room selected')">🛏️🛏️🛏️</span>
+        </div>
+    </div>
+    <button class="button" onclick="showPage('payment-method')">Continue</button>
+</div>
+
+<!-- Payment Method Page -->
+<div class="container" id="payment-method" style="display: none;">
+    <h2>Select Payment Method</h2>
+    <div class="form-group">
+        <label for="payment">Payment Method:</label>
+        <select id="payment">
+            <option value="credit-card">Credit Card</option>
+            <option value="debit-card">Debit Card</option>
+            <option value="paypal">PayPal</option>
+        </select>
+    </div>
+    <button class="button" onclick="alert('Proceed to payment processing')">Continue</button>
+</div>
+
+<script>
+function showPage(pageId) {
+    var pages = document.querySelectorAll('.container');
+    pages.forEach(function(page) {
+        page.style.display = 'none';
+    });
+    document.getElementById(pageId).style.display = 'block';
+}
+</script>
+
+</body>
+</html>
